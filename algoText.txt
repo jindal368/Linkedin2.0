@@ -1,0 +1,47 @@
+1 . Make proper screen architecture first
+  1.1 <Header>
+  1.2 then , split main screen into 9-cols , consist :
+      1.2.1 Profile
+      1.2.2 Feed
+      1.2.3 News
+
+2 . Headsup to header first :
+  2.1 image , searchIcon , headerIcons , sign etc
+
+3 . Moves to profile : 
+  3.1 Make 3 cards , and add required details there as needed
+
+4 . move to feed : 
+  4.1 feed contain two components : 
+       1 . Box
+       2 . posts area
+5 . build post area along with comment facility , 
+    i.e, on click comment icon comment component should be shown
+   
+6 . build comment section :
+   6.1 : input field to do comment
+   6.2 : fetch comment by postId
+ 
+7 . Build fetchcomment component
+
+// backend:
+1 . make db config and connection
+
+2 . set serverSideProps on index.ts to fetch posts
+
+3 . API : 1 .fetchPosts
+          2 .fetchcomment
+          3 .createPost
+          4 .createComment
+
+// google authentication
+
+1 . setup firebase with your app and add configuration in app
+2 . do google auth
+
+// changes
+
+1 . validation for login/signup
+2 . method to axios the API
+
+// Testing

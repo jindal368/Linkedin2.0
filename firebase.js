@@ -11,7 +11,7 @@ import 'firebase/compat/auth';
     messagingSenderId: "9964420385",
     appId: "1:9964420385:web:db6591d47df642a01e9260",
     measurementId: "G-96FCN54QMK"
-});
+} );
 
 export const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider()

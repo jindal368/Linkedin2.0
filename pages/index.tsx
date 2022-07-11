@@ -32,29 +32,30 @@ const Home: NextPage = ({ posts }: Props) => {
 
       <Toaster />
 
-      {!user ? <SignIn /> : <main className='flex flex-col overflow-scroll scrollbar-hide' style={{ maxHeight: '100vh' }}>
-
-        {/* Header */}
-        <div>
-          <div className='mx-auto lg:max-w-6xl max-h-screen overflow-hidden'>
-            <Header />
+      {!user ?
+        <SignIn />
+        :
+        <main className='flex flex-col overflow-scroll scrollbar-hide' style={{ maxHeight: '100vh' }}>
+          {/* Header */}
+          <div>
+            <div className='mx-auto lg:max-w-6xl max-h-screen overflow-hidden'>
+              <Header />
+            </div>
           </div>
-        </div>
 
 
-        {/* Mid */}
-        <div className='bg-zinc-100'>
-          <div className='grid grid-cols-9 mx-auto lg:max-w-6xl'>
+          {/* Mid */}
+          <div className='bg-zinc-100'>
+            <div className='grid grid-cols-9 mx-auto lg:max-w-6xl'>
 
-            {/* <h1>Profile</h1> */}
-            <Profile />
+              <Profile />
 
-            <Feed postData={posts} />
+              <Feed postData={posts} />
 
-            <News />
+              <News />
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
       }
 
