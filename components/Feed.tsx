@@ -35,14 +35,14 @@ function Feed({ postData }: Props) {
 
     return (
         <div className='col-span-7 lg:col-span-5 border-x'>
-            <div className='flex items-center justify-between'>
+            {/* <div className='flex items-center justify-between'>
 
                 <RefreshIcon onClick={() => handleRefresh()} className='h-8 w-8 cursor-pointer text-blue-500 mr-5 mt-5 transition-all duration-500 ease-out hover:rotate-180 active:scale-125' />
-            </div>
+            </div> */}
 
             <div className='overflow-scroll flex flex-col scrollbar-hide' style={{ maxHeight: "90vh" }}>
                 {/* TweetBox... */}
-                <Box />
+                <Box handleRefresh={handleRefresh} />
                 {/* Tweets */}
                 <Posts posts={posts} />
             </div>

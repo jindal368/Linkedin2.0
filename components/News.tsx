@@ -12,6 +12,7 @@ function News() {
                 allowFullScreen
                 title="Embedded post">
             </iframe>
+
         </div>
     )
 }

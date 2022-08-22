@@ -11,9 +11,14 @@ import { TemplateIcon, VideoCameraIcon } from '@heroicons/react/solid';
 import createPost from '../utils/createPosts'
 import toast from 'react-hot-toast';
 import { AuthContext } from '../AppContext';
-function Box() {
+interface Props {
+    handleRefresh: any
+}
+function Box({ handleRefresh }: Props) {
     const { user } = useContext(AuthContext);
     const [input, setInput] = useState<string>('');
+    const [toggleButton, setToggleButton] = useState<boolean>(false);
+    const [photoLink, setPhotoLink] = useState<string>('');
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -22,11 +27,13 @@ function Box() {
             name: user.displayName,
             designation: "SDE @ Gainsight",
             profileImg: user.photoURL,
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIJYHqPndy47ghiHY9rE8vSbCO2dfOPGVqCMLYkxZEew&s',
-            text: input
+            image: photoLink,
+            text: input,
+            like: []
         }
         await createPost(postData).then((res) => {
             setInput('')
+            setPhotoLink('')
             toast.success("Posted Successfully", {
                 id: refreshToast
             })
@@ -37,7 +44,7 @@ function Box() {
         <div className='bg-white m-4 rounded-lg'>
             <div className='flex flex-row mt-3 m-4 rounded-full space-x-3 '>
                 {/* Avatar */}
-                <img src={user.photoURL} alt='img' className='h-14 w-14 rounded-full' />
+                <img src={user.photoURL} alt='img' className='h-14 w-14 rounded-full' onClick={() => handleRefresh()} />
                 <input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
@@ -46,13 +53,26 @@ function Box() {
                     className='bg-transparent outline-none border-2 text-start pl-5 rounded-full flex-1 mt-1 text-sm font-semibold text-gray-600 hover:bg-gray-100 transition-all duration-200 cursor-pointer' />
             </div>
 
-            <div className='flex flex-row justify-between mb-4'>
+            <div className='flex flex-row justify-between mb-4 overflow-scroll scrollbar-hide'>
 
                 <div className='flex flex-row ml-4 space-x-20 '>
                     <div className='flex flex-row space-x-2'>
-                        <PhotographIcon className="h-6 w-8 text-blue-500 hover:bg-gray-100 transition-all duration-200 cursor-pointer" />
-                        <p className=' font-bold text-gray-500'>Photo</p>
+                        {!toggleButton ?
+                            <>
+                                <PhotographIcon className="h-6 w-8 text-blue-500 hover:bg-gray-100 transition-all duration-200 cursor-pointer" onClick={() => setToggleButton(!toggleButton)} />
+                                <p className=' font-bold text-gray-500'>Photo</p>
+                            </>
+                            :
+                            <input
+
+                                value={photoLink}
+                                onChange={(e) => setPhotoLink(e.target.value)}
+                                placeholder="paste Image Link"
+                                type="text"
+                                className='bg-transparent outline-none border-2 text-start pl-5 rounded-full flex-1 mt-1 text-sm font-semibold text-gray-600 hover:bg-gray-100 transition-all duration-200 cursor-pointer' />
+                        }
                     </div>
+
                     <div className='flex flex-row space-x-2'>
                         <VideoCameraIcon className="h-6 w-6 text-green-700" />
                         <p className=' font-bold text-gray-500'>Video</p>

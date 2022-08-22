@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { EmojiHappyIcon, PhotographIcon } from '@heroicons/react/outline'
 import FetchComments from './FetchComments'
 import { fetchComment } from '../utils/fetchComment'
 import createComment from '../utils/createComment'
 import { Comment } from '../typing'
 import toast from 'react-hot-toast'
+import { AuthContext } from '../AppContext'
 interface Props {
     showComment: boolean
     postId: string
+    comments: Comment
+    setComments: any
 }
-function Comment({ showComment, postId }: Props) {
+function Comment({ showComment, postId, comments, setComments }: Props) {
 
     const [input, setInput] = useState<string>('')
-    const [comments, setComments] = useState<Comment[]>([])
+
+    const { user } = useContext(AuthContext);
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         const refreshToast = toast.loading('Commenting....')
         const commentData = {
-            name: "Vishesh Jindal",
+            name: user.displayName,
             designation: "SDE @ Google",
-            profileImage: 'https://lh3.googleusercontent.com/ogw/ADea4I6apRQFow7H2WwHtRziF4aGanoNYvbrEgQnOPb2=s32-c-mo',
+            profileImage: user.photoURL,
             postId: postId,
             comment: input
         }
@@ -58,7 +62,7 @@ function Comment({ showComment, postId }: Props) {
             <div className='bg-white'>
                 <div className='flex flex-row pt-2 pl-3 pb-3 space-x-2 '>
                     {/* Avatar */}
-                    <img src='https://avatars.githubusercontent.com/u/46999893?v=4' alt='img' className='h-10 w-10 rounded-full mt-1' />
+                    <img src={user.photoURL} alt='img' className='h-10 w-10 rounded-full mt-1' />
                     <div className='flex flex-row flex-1 h-12 rounded-full border-2'>
                         <input
                             value={input}

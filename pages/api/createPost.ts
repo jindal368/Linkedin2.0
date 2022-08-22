@@ -18,10 +18,11 @@ export default async function handler(
   
   try {
     
-    const { name, designation, image, profileImg, text } = (req.body);
+    const { name, designation, image, profileImg, text ,like } = (req.body);
+    // const like:any = [];
     
     const db = await connectToDatabase()
-      await db.db.collection('posts').insertOne({ name, designation, image, profileImg ,text})
+      await db.db.collection('posts').insertOne({ name, designation, image, profileImg ,text , like,createdAt:Date.now() })
 
     return res.json({
         message: 'Post added successfully',

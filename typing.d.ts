@@ -1,6 +1,6 @@
 export interface Post extends PostBody {
     _id: string
-    _createdAt: string
+    createdAt: number
     _updatedAt: string
     _rev: string
     _type: 'tweet'
@@ -15,6 +15,7 @@ export type PostBody = {
     profileImg: string
     hashtag?:array
     image?: string
+    like?:array
 }
 
 export interface Comment extends CommentBody {
@@ -35,5 +36,9 @@ export type CommentBody = {
 }
 
 export interface User {
+    _id: string,
+    displayPicture: string,
+    designation: string,
+    name: string,
     
 }

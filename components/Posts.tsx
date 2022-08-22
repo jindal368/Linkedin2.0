@@ -7,6 +7,7 @@ import PostBody from './PostBody'
 
 interface Props {
     posts: Post[]
+
 }
 
 function Posts({ posts }: Props) {
